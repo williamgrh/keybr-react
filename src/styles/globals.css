@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  font-size: 18px;
+}
+
+@layer components {
+  .btn-primary {
+    @apply relative m-0 inline-block min-h-[2rem] min-w-[2rem] cursor-pointer whitespace-nowrap border-none bg-none p-0 text-center align-middle text-[.85rem] font-normal uppercase not-italic leading-8 text-text;
+  }
+}
