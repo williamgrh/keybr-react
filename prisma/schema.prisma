@@ -11,37 +11,60 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model User {
-  id      String   @id
-  lessons Lesson[]
+// model User {
+//   id      String   @id
+//   lessons Lesson[]
 
-  @@index([id])
-}
+//   @@index([id])
+// }
 
-model Lesson {
-  id        Int      @id @default(autoincrement())
-  updatedAt DateTime @updatedAt
-  length    Int
-  time      Int
-  errors    Int
-  speed     Float
-  keys      Key[]
+// model Lesson {
+//   id        Int      @id @default(autoincrement())
+//   updatedAt DateTime @updatedAt
+//   length    Int
+//   time      Int
+//   errors    Int
+//   speed     Float
+//   keys      Key[]
 
-  user   User   @relation(fields: [userId], references: [id])
+//   user   User   @relation(fields: [userId], references: [id])
+//   userId String
+
+//   @@index([userId])
+// }
+
+// model Key {
+//   id        Int    @id @default(autoincrement())
+//   keyChar   String @db.Char(1)
+//   hitCount  Int
+//   missCount Int
+//   time      Int
+
+//   Lesson   Lesson @relation(fields: [lessonId], references: [id])
+//   lessonId Int
+
+//   @@index([lessonId])
+// }
+
+model UserKeyStats {
+  id           Int     @id @default(autoincrement())
+  key          String  @db.Char(1)
+  averageSpeed Float   @default(0)
+  bestSpeed    Float   @default(0)
+  confidence   Float   @default(0)
+  learningRate Float   @default(0)
+  unlocked     Boolean @default(false)
+
   userId String
 
   @@index([userId])
 }
 
-model Key {
-  id        Int    @id @default(autoincrement())
-  keyChar   String @db.Char(1)
-  hitCount  Int
-  missCount Int
-  time      Int
+model Lesson {
+  id      Int    @id @default(autoincrement())
+  content String @db.TinyText
 
-  Lesson   Lesson @relation(fields: [lessonId], references: [id])
-  lessonId Int
+  userId String
 
-  @@index([lessonId])
+  @@index([userId])
 }
